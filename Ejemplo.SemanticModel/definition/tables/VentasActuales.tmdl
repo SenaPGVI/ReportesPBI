@@ -48,14 +48,6 @@ table VentasActuales
 
 		annotation SummarizationSetBy = Automatic
 
-	column Provincias
-		dataType: string
-		lineageTag: 169e301d-2edb-41d0-9b36-0fe2447e1eb1
-		summarizeBy: none
-		sourceColumn: Provincias
-
-		annotation SummarizationSetBy = Automatic
-
 	column Superficie
 		dataType: int64
 		formatString: 0
@@ -99,15 +91,25 @@ table VentasActuales
 
 		annotation SummarizationSetBy = Automatic
 
+	column Provincia
+		dataType: string
+		lineageTag: 98dbebca-db5a-4735-916b-be48d3e41cc4
+		summarizeBy: none
+		sourceColumn: Provincia
+
+		annotation SummarizationSetBy = Automatic
+
 	partition VentasActuales = m
 		mode: import
 		source =
 				let
-				    Origen = Excel.Workbook(File.Contents("C:\Users\RonaldStevenRamosRam\OneDrive - CM Consulting SAS\Desktop\BD-Inmuebles.xlsx"), null, true),
-				    VentasActuales_Table = Origen{[Item="VentasActuales",Kind="Table"]}[Data],
-				    #"Tipo cambiado" = Table.TransformColumnTypes(VentasActuales_Table,{{"Ref", Int64.Type}, {"Fecha Alta", type date}, {"Tipo", type text}, {"OP", type text}, {"Provincias", type text}, {"Superficie", Int64.Type}, {"Venta", type number}, {"Fecha Venta", type date}, {"Vendedor", type text}})
+				    Source = Excel.Workbook(Web.Contents("https://cmconsultingsas-my.sharepoint.com/personal/ronald_ramos_cmconsulting_com_co/Documents/Documents/BD-Inmuebles.xlsx"), null, true),
+				    VentasActuales_Table = Source{[Item="VentasActuales",Kind="Table"]}[Data],
+				    #"Changed Type" = Table.TransformColumnTypes(VentasActuales_Table,{{"Ref", Int64.Type}, {"Fecha Alta", type date}, {"Tipo", type text}, {"OP", type text}, {"Provincia", type text}, {"Superficie", Int64.Type}, {"Venta", type number}, {"Fecha Venta", type date}, {"Vendedor", type text}})
 				in
-				    #"Tipo cambiado"
+				    #"Changed Type"
 
 	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
 
