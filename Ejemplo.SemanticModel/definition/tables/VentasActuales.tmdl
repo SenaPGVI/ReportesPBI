@@ -1,0 +1,113 @@
+table VentasActuales
+	lineageTag: cd8879ee-9c19-4704-978d-ab813d31e078
+
+	measure 'Color barras' = IF(SUM(VentasActuales[Venta])>705000000,"Red","Black")
+		lineageTag: 2162b7da-974a-4901-a969-dadb598dd929
+
+	measure 'Título de Ventas' = "Total de ventas por el Tipo "& SELECTEDVALUE(VentasActuales[Tipo])& " es: "& FORMAT(SUM(VentasActuales[Venta]),"$00,00.00")
+		lineageTag: b617ea67-6f33-40cd-b840-872a38a49de1
+
+	column Ref
+		dataType: int64
+		formatString: 0
+		lineageTag: 881f3c76-cc06-403e-90ca-417442c649e1
+		summarizeBy: sum
+		sourceColumn: Ref
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fecha Alta'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: c5d993b1-02ce-478e-8540-3e2e12ed6f22
+		summarizeBy: none
+		sourceColumn: Fecha Alta
+
+		variation Variación
+			isDefault
+			relationship: 75c0319e-aa58-422c-88e8-9e66ca491ef1
+			defaultHierarchy: LocalDateTable_59d766fa-26be-410e-ab32-15a3eda2519d.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Tipo
+		dataType: string
+		lineageTag: 15645c14-e304-4541-8fd2-2d00c757a120
+		summarizeBy: none
+		sourceColumn: Tipo
+
+		annotation SummarizationSetBy = Automatic
+
+	column OP
+		dataType: string
+		lineageTag: 80b6d6d0-386b-4adc-8340-f064909d60d4
+		summarizeBy: none
+		sourceColumn: OP
+
+		annotation SummarizationSetBy = Automatic
+
+	column Provincias
+		dataType: string
+		lineageTag: 169e301d-2edb-41d0-9b36-0fe2447e1eb1
+		summarizeBy: none
+		sourceColumn: Provincias
+
+		annotation SummarizationSetBy = Automatic
+
+	column Superficie
+		dataType: int64
+		formatString: 0
+		lineageTag: 18e3fb61-8c1b-4f64-9849-86daa3c58425
+		summarizeBy: sum
+		sourceColumn: Superficie
+
+		annotation SummarizationSetBy = Automatic
+
+	column Venta
+		dataType: double
+		lineageTag: d3500ca7-b310-483e-bc26-9ab522fcfeea
+		summarizeBy: sum
+		sourceColumn: Venta
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Fecha Venta'
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 886a9e52-2e20-41ac-b1e7-eb2a860a3eb0
+		summarizeBy: none
+		sourceColumn: Fecha Venta
+
+		variation Variación
+			isDefault
+			relationship: a28b00a9-7d9d-4946-bd9c-f83f6eac93b3
+			defaultHierarchy: LocalDateTable_3109d731-0dc7-4aad-b18f-7b5e1d70cf72.'Jerarquía de fechas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column Vendedor
+		dataType: string
+		lineageTag: 995c9365-61b8-415f-b5d9-8c7b7f29fd73
+		summarizeBy: none
+		sourceColumn: Vendedor
+
+		annotation SummarizationSetBy = Automatic
+
+	partition VentasActuales = m
+		mode: import
+		source =
+				let
+				    Origen = Excel.Workbook(File.Contents("C:\Users\RonaldStevenRamosRam\OneDrive - CM Consulting SAS\Desktop\BD-Inmuebles.xlsx"), null, true),
+				    VentasActuales_Table = Origen{[Item="VentasActuales",Kind="Table"]}[Data],
+				    #"Tipo cambiado" = Table.TransformColumnTypes(VentasActuales_Table,{{"Ref", Int64.Type}, {"Fecha Alta", type date}, {"Tipo", type text}, {"OP", type text}, {"Provincias", type text}, {"Superficie", Int64.Type}, {"Venta", type number}, {"Fecha Venta", type date}, {"Vendedor", type text}})
+				in
+				    #"Tipo cambiado"
+
+	annotation PBI_ResultType = Table
+
