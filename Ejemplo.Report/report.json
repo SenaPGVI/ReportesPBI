@@ -395,6 +395,27 @@
         }
       ],
       "width": 1280.00
+    },
+    {
+      "config": "{}",
+      "displayName": "Page 1",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "c2ae459014bd29e3bd90",
+      "ordinal": 6,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"131901b6ed2073b0998b\",\"layouts\":[{\"id\":0,\"position\":{\"x\":154.07690470503942,\"y\":118.61475997133986,\"z\":0,\"width\":280.028660138524,\"height\":280.028660138524,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"HOLA MI ROD\",\"textStyle\":{\"fontSize\":\"44pt\"}}]}]}}]}}}",
+          "filters": "[]",
+          "height": 280.03,
+          "width": 280.03,
+          "x": 154.08,
+          "y": 118.61,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
     }
   ]
 }
