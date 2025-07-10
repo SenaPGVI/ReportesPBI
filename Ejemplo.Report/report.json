@@ -66,6 +66,27 @@
       "width": 398.00
     },
     {
+      "config": "{}",
+      "displayName": "Página 1",
+      "displayOption": 1,
+      "filters": "[]",
+      "height": 720.00,
+      "name": "27ef0d695009294c0036",
+      "ordinal": 6,
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"35223709daacb500c21a\",\"layouts\":[{\"id\":0,\"position\":{\"x\":243.5036496350365,\"y\":127.88321167883213,\"z\":0,\"width\":280.2919708029197,\"height\":280.2919708029197,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"tableEx\",\"projections\":{\"Values\":[{\"queryRef\":\"Prueba.1\"},{\"queryRef\":\"Prueba.2\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"p\",\"Entity\":\"Prueba\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"1\"},\"Name\":\"Prueba.1\",\"NativeReferenceName\":\"1\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"p\"}},\"Property\":\"2\"},\"Name\":\"Prueba.2\",\"NativeReferenceName\":\"2\"}]},\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 280.29,
+          "width": 280.29,
+          "x": 243.50,
+          "y": 127.88,
+          "z": 0.00
+        }
+      ],
+      "width": 1280.00
+    },
+    {
       "config": "{\"visibility\":1}",
       "displayName": "Página 5",
       "displayOption": 1,
